@@ -1,0 +1,46 @@
+<div>
+<!-- Navigation buttons for previous and next -->
+<button class="buttoncss" (click)="goToPreviousStage()" *ngIf="currentStage > 1">Previous Stage</button>
+<button class="buttoncss" (click)="goToNextStage()" *ngIf="currentStage <= highestStageCompleted && currentStage < totalStages">Next Stage</button>
+
+    <!-- Navigation buttons for specific stages -->
+    <button class="buttoncss" (click)="setStage(1)" *ngIf="currentStage !== 1">Stage 1</button>
+    <button class="buttoncss"(click)="setStage(2)" *ngIf="currentStage !== 2">Stage 2</button>
+    <button class="buttoncss"(click)="setStage(3)" *ngIf="currentStage !== 3">Stage 3</button>
+    <button class="buttoncss"(click)="setStage(4)" *ngIf="currentStage !== 4">Stage 4</button>
+
+    <!-- Conditional content for each stage-->
+    <div *ngIf="currentStage === 1">
+    <app-captcha
+    [currentStage]="currentStage"
+    (success)="onCaptchaSuccess($event)"
+    ></app-captcha>
+    </div>
+
+    <div *ngIf="currentStage === 2">
+    <app-math
+    operation="addition"
+    [currentStage]="currentStage"
+    (success)="onCaptchaSuccess($event)"
+    ></app-math>
+    </div>
+
+    <div *ngIf="currentStage === 3">
+    <app-math
+    operation="subtraction"
+    [currentStage]="currentStage"
+    (success)="onCaptchaSuccess($event)"
+    ></app-math>
+    </div>
+
+    <app-question *ngIf="currentStage === 4" (success)="onQuestionSuccess($event)"></app-question>
+     <app-result *ngIf="currentStage === totalStages + 1"></app-result>
+</div>
+    <!-- <div *ngIf="currentStage === 4">
+    <app-question
+    (success)="onCaptchaSuccess()"
+    ></app-question>
+    </div> -->
+
+
+    <!-- <app-question *ngIf="currentStage === 4" (success)="onQuestionSuccess()"></app-question> -->
