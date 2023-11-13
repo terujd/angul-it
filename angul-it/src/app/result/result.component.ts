@@ -1,33 +1,22 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { StageService } from '../service/service.component';
+import { Component } from '@angular/core'; // Import necessary modules from Angular
+import { Router } from '@angular/router'; // Import the Router module
+import { StageService } from '../service/service.component'; // Import the StageService
 
-@Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+@Component({// Component decorator
+  selector: 'app-result',// Selector
+  templateUrl: './result.component.html',// Template URL
+  styleUrls: ['./result.component.scss']// Style URLs
 })
 
-export class ResultComponent {
-  totalStagesCompleted: number;
+export class ResultComponent {// Component class
+  totalStagesCompleted: number;// Public property to hold the total number of stages completed
   totalStages: number; // Public property to hold the total number of stages
 
+  // Constructor to inject the StageService and Router
   constructor(private stageService: StageService, private router: Router) {
-    this.totalStagesCompleted = this.stageService.getHighestStageCompleted();
+    this.totalStagesCompleted = this.stageService.getHighestStageCompleted();// Assign the value from the service
     this.totalStages = this.stageService.getTotalStages(); // Assign the value from the service
   }
-
-// export class ResultComponent {
-//   totalStagesCompleted: number; // This will hold the number of stages completed
-
-
-//   constructor(
-//     private router: Router,
-//     private stageService: StageService
-//     ) {
-//       this.totalStagesCompleted = this.stageService.getHighestStageCompleted();
-//     }
-
 
   // Method to navigate back to the home page or the first stage
   goToHome(): void {

@@ -1,3 +1,4 @@
+// Purpose: Contains the questions and answers for the quiz.
 export const questions = [
     { text: 'What is the capital of France?', answer: 'Paris' },
     { text: 'What is the largest planet in our Solar System?', answer: 'Jupiter' },

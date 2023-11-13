@@ -3,7 +3,5 @@
     <p>{{ question.text }}</p>
     <input type="text" class="userAnswer" [(ngModel)]="userAnswer">
     <button class="buttoncss"(click)="checkAnswer()">Submit</button>
-    <!-- <p *ngIf="isCorrect">Correct!</p> -->
     <p *ngIf="!isCorrect && wrongAnswer">Wrong answer, try again.</p>
-    <!-- <p *ngIf="answered && !isCorrect">You are not human! YOU ARE A BOT</p> -->
 </div>
