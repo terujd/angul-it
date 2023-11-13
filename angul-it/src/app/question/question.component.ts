@@ -37,20 +37,14 @@ export class QuestionComponent implements OnInit {
   checkAnswer(): void {
     this.numTries++;
 
-    if (this.userAnswer === this.question.answer) {
+    if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {
       this.isCorrect = true;
-      // this.success.emit({ stage: this.currentStage });
       this.success.emit({ stage: this.currentStage, tries: this.numTries });
       this.numTries = 0;
       // Reset the number of tries
-      // this.numTries = 0;
     } else {
       this.isCorrect = false;
       this.wrongAnswer = true;
     }
   }
 }
-      // const stageNumber = parseInt(this.question.text.split(' ')[1]);
-      // this.success.emit(); // This line emits the success event, emits means "sends out"
-      // this.success.emit(this.numTries); // This line emits the success event, emits means "sends out"
-      // this.success.emit({ stage: stageNumber, tries: this.numTries });
