@@ -70,7 +70,7 @@ Run
     ```bash
     ng serve
     ```
-for a dev server. Navigate to [localhost](http://localhost:4200/) or go to [angul-it](https://terujd.github.io/angul-it/). The application will automatically reload if you change any source files.
+for a dev server. Navigate to [localhost](http://localhost:4200/).
 
 ### Building the Project
 Run ng build to build the project. The build artifacts will be stored in the dist/ directory.
