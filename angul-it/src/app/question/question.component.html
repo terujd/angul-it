@@ -1,7 +1,20 @@
-<div class="question-challange">
+<!-- <div class="question-challange">
     <p>Answer the following question:</p>
     <p>{{ question.text }}</p>
     <input type="text" class="userAnswer" [(ngModel)]="userAnswer">
     <button class="buttoncss"(click)="checkAnswer()">Submit</button>
+    <p *ngIf="!isCorrect && wrongAnswer">Wrong answer, try again.</p>
+</div> -->
+
+<div class="question-challange">
+    <p>Answer the following question:</p>
+    <p>{{ question.text }}</p>
+    
+    <!-- Form wrapping the input and button -->
+    <form (ngSubmit)="checkAnswer()">
+        <input type="text" class="userAnswer" [(ngModel)]="userAnswer" name="userAnswer">
+        <button class="buttoncss" type="submit">Submit</button>
+    </form>
+
     <p *ngIf="!isCorrect && wrongAnswer">Wrong answer, try again.</p>
 </div>

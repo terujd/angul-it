@@ -11,13 +11,9 @@ import { StageService } from '../service/service.component'; // Imports the stag
 
 // this component is used to display the home page
 export class HomeComponent implements OnInit {
-  // this variable is used to keep track of the total number of stages
-  readonly totalStages = 4;
-
-  // this variable is used to keep track of the current stage
-  currentStage = 1;
-  // this variable is used to keep track of the highest stage completed
-  highestStageCompleted = 0;
+  readonly totalStages = 4;// this variable is used to keep track of the total number of stages
+  currentStage = 1;// this variable is used to keep track of the current stage
+  highestStageCompleted = 0; // this variable is used to keep track of the highest stage completed
   
   // inject the router service
   constructor(private router: Router,
@@ -27,6 +23,8 @@ export class HomeComponent implements OnInit {
   // this method is called when the component is initialized
   ngOnInit() {
     this.stageService.initializeSession();// Initialize the session
+    this.currentStage = this.stageService.getCurrentStage(); // Ensure this is 1 on start
+    this.highestStageCompleted = this.stageService.getHighestStageCompleted(); // Ensure this is 0 on start
     // update the current stage and the highest stage completed from the service
     this.updateStagesFromService();
     // logs if the current stage and the highest stage completed
@@ -104,6 +102,7 @@ export class HomeComponent implements OnInit {
     // check if the stage is between 1 and 4
     if (stage > 1 && stage <= this.highestStageCompleted + 1) {// If the stage is valid, set the stage
       this.currentStage = stage;// Set the current stage
+      this.stageService.setCurrentStage(this.currentStage);// Set the current stage in the service
     }
   }
 }
