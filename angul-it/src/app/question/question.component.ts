@@ -19,6 +19,7 @@ export class QuestionComponent implements OnInit {
   isCorrect: boolean = false;
   wrongAnswer: boolean = false;
   numTries: number = 0;
+  errorMessage: string = '';
 
   // This method is called when the component is initialized
   ngOnInit(): void {
@@ -36,15 +37,30 @@ export class QuestionComponent implements OnInit {
 
   // This method checks the user's answer
   checkAnswer(): void {
-    this.numTries++;// Increment the number of tries
+    this.numTries++; // Increment the number of tries
 
-    if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {// This line checks if the user's answer is correct
-      this.isCorrect = true;// This line sets the isCorrect flag to true
-      this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
-      this.numTries = 0;// Reset the number of tries
+    if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {
+        this.isCorrect = true; // Set isCorrect to true if the answer is correct
+        this.success.emit({ stage: this.currentStage, tries: this.numTries }); // Emit success event
+        this.numTries = 0; // Reset the number of tries
+        this.errorMessage = ''; // Clear any error message
     } else {
-      this.isCorrect = false;// This line sets the isCorrect flag to false
-      this.wrongAnswer = true;// This line sets the wrongAnswer flag to true
+        this.isCorrect = false; // Set isCorrect to false if the answer is wrong
+        this.wrongAnswer = true; // Set wrongAnswer to true
+        this.errorMessage = 'Wrong answer, please try again.'; // Set the error message
+        this.generateQuestion(); // Generate a new question since the answer was wrong
     }
   }
 }
+  // checkAnswer(): void {
+  //   this.numTries++;// Increment the number of tries
+
+  //   if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {// This line checks if the user's answer is correct
+  //     this.isCorrect = true;// This line sets the isCorrect flag to true
+  //     this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
+  //     this.numTries = 0;// Reset the number of tries
+  //   } else {
+  //     this.isCorrect = false;// This line sets the isCorrect flag to false
+  //     this.wrongAnswer = true;// This line sets the wrongAnswer flag to true
+  //   }
+  // }

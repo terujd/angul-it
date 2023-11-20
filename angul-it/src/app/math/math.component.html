@@ -4,7 +4,8 @@
         <label for="userAnswer" class="question">{{ question }} = ?</label>
         <input type="number" id="userAnswer" [(ngModel)]="userAnswer" name="userAnswer" (ngModelChange)="answered = false" />
         <button class="buttoncss" type="submit">Submit</button>
-        <p *ngIf="answered && !isCorrect">Incorrect, try again!</p>
+        <p *ngIf="errorMessage">{{ errorMessage }}</p>
+        <!-- <p *ngIf="answered && !isCorrect">Incorrect, try again!</p> -->
         <p *ngIf="answered && isCorrect">Correct, well done!</p>
     </form>
 </div>

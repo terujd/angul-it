@@ -21,6 +21,8 @@ export class MathComponent implements OnInit {
   isCorrect: boolean = false;
   answered: boolean = false;
   numTries: number = 0;
+  errorMessage: string = '';
+
 
   // This method is called when the component is initialized
   ngOnInit(): void {
@@ -47,12 +49,27 @@ export class MathComponent implements OnInit {
 
   // This method checks the user's answer
   checkAnswer(): void {
-    if (this.userAnswer === this.correctAnswer) {// This line checks if the user's answer is correct
-      this.isCorrect = true;// This line sets the isCorrect flag to true
-      this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
+    this.numTries++; // Increment the number of tries
+  
+    if (this.userAnswer === this.correctAnswer) {
+      this.isCorrect = true;
+      this.success.emit({ stage: this.currentStage, tries: this.numTries });
+      this.numTries = 0; // Reset the number of tries
+      this.errorMessage = ''; // Clear any error message
     } else {
-      this.isCorrect = false;// This line sets the isCorrect flag to false
-      this.answered = true;// This line sets the answered flag to true
+      this.isCorrect = false;
+      this.answered = true;
+      this.errorMessage = 'Wrong answer, please try again.'; // Set the error message
+      this.generateQuestion(); // Generate a new question if the answer is incorrect
     }
   }
 }
+  // checkAnswer(): void {
+  //   if (this.userAnswer === this.correctAnswer) {// This line checks if the user's answer is correct
+  //     this.isCorrect = true;// This line sets the isCorrect flag to true
+  //     this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
+  //   } else {
+  //     this.isCorrect = false;// This line sets the isCorrect flag to false
+  //     this.answered = true;// This line sets the answered flag to true
+  //   }
+  // }

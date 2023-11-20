@@ -16,5 +16,6 @@
         <button class="buttoncss" type="submit">Submit</button>
     </form>
 
-    <p *ngIf="!isCorrect && wrongAnswer">Wrong answer, try again.</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <!-- <p *ngIf="!isCorrect && wrongAnswer">Wrong answer, try again.</p> -->
 </div>
