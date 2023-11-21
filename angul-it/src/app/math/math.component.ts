@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'; // Imports the necessary dependencies from Angular
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Declares the component decorator
 @Component({
@@ -12,20 +13,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'; 
 export class MathComponent implements OnInit {
   @Input() operation!: 'addition' | 'subtraction';// Defines the input property for the operation
   @Input() currentStage!: number;// Defines the input property for the current stage
-  @Output() success = new EventEmitter<{ stage: number, tries: number }>();// Defines the output property for the success event
+  @Output() mathSuccess = new EventEmitter<{ stage: number, tries: number }>();// Defines the output property for the success event
 
 // Defines the properties for the components
   question!: string;
   correctAnswer!: number;
-  userAnswer!: number;
+  userAnswer?: number;
   isCorrect: boolean = false;
   answered: boolean = false;
   numTries: number = 0;
+  mathForm!: FormGroup;
   errorMessage: string = '';
 
 
   // This method is called when the component is initialized
   ngOnInit(): void {
+    this.mathForm = new FormGroup({// Creates a new form group
+      userAnswer: new FormControl('', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,2})?$')]),
+    });// Creates a new form control
     // Generate the first random question when the component is initialized
     this.generateQuestion();
   }
@@ -47,18 +52,33 @@ export class MathComponent implements OnInit {
     this.answered = false;// This line resets the answered flag
   }
 
-  // This method checks the user's answer
+// This method checks the user's answer
   checkAnswer(): void {
     this.numTries++; // Increment the number of tries
+
+    this.isCorrect = false; // Reset the isCorrect flag
+    this.errorMessage = ''; // Clear any error message
+
+    if (this.userAnswer === undefined || this.userAnswer === null) {
+      this.errorMessage = 'Please enter an answer.'; // Set the error message
+      return; // Return from the method
+    }
+
+  // Convert the input to a string and trim it to remove leading/trailing whitespace
+  const answerString = this.userAnswer.toString().trim();
+
+  // Check if the userAnswer is a valid number (allowing negative numbers)
+  if (!/^[-]?\d+(\.\d+)?$/.test(answerString)) {
+    this.errorMessage = 'Please enter a valid number.';
+    return; // Exit the method
+  }
   
     if (this.userAnswer === this.correctAnswer) {
       this.isCorrect = true;
-      this.success.emit({ stage: this.currentStage, tries: this.numTries });
+      this.mathSuccess.emit({ stage: this.currentStage, tries: this.numTries });
       this.numTries = 0; // Reset the number of tries
       this.errorMessage = ''; // Clear any error message
     } else {
-      this.isCorrect = false;
-      this.answered = true;
       this.errorMessage = 'Wrong answer, please try again.'; // Set the error message
       this.generateQuestion(); // Generate a new question if the answer is incorrect
     }

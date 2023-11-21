@@ -11,7 +11,7 @@ import { questions } from './questions'; // Imports the questions from the quest
 // Exports the component class
 export class QuestionComponent implements OnInit {
   @Input() currentStage!: number;// Defines the input property for the current stage
-  @Output() success = new EventEmitter<{ stage: number, tries: number }>();// Defines the output property for the success event
+  @Output() questionSuccess = new EventEmitter<{ stage: number, tries: number }>();// Defines the output property for the success event
 
   // Defines the properties for the components
   question!: { text: string; answer: string };
@@ -41,7 +41,7 @@ export class QuestionComponent implements OnInit {
 
     if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {
         this.isCorrect = true; // Set isCorrect to true if the answer is correct
-        this.success.emit({ stage: this.currentStage, tries: this.numTries }); // Emit success event
+        this.questionSuccess.emit({ stage: this.currentStage, tries: this.numTries }); // Emit success event
         this.numTries = 0; // Reset the number of tries
         this.errorMessage = ''; // Clear any error message
     } else {

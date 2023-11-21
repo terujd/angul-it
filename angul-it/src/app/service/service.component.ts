@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'; // Import the Injectable module from
 import * as CryptoJS from 'crypto-js'; // Import the CryptoJS module
 import { Observable, throwError } from 'rxjs'; // Import the Observable and throwError modules from rxjs
 import { catchError } from 'rxjs/operators'; // Import the catchError module from rxjs/operators
-
+import { environment } from '../../environments/environment'; // Import the environment object
 
 @Injectable({// Decorator that marks a class as available to be provided and injected as a dependency
   providedIn: 'root'// Declare that the service should be provided in the root injector
@@ -47,8 +47,8 @@ export class StageService {
     return 0;
   }
 
-  getYourData(): Observable<any> {
-    return this.http.get('http://localhost:4200/').pipe(
+  getYourData(): Observable<Response> {
+    return this.http.get<Response>(`${environment.apiUrl}your-endpoint`).pipe(
       catchError(this.handleError)
     );
   }
@@ -98,32 +98,3 @@ export class StageService {
     localStorage.removeItem(this.highestStageCompletedKey);
   }
 }
-
-  // // This method retrieves the current stage
-  // getCurrentStage(): number {
-  //   const stage = localStorage.getItem(this.currentStageKey);
-  //   console.log('Getting current stage from localStorage: ${stage}');
-  //   return stage ? parseInt(stage, 10) : 1;  // If nothing is saved, the current stage is 1
-  //   return this.getFromLocalStorage(this.currentStageKey) || 1;
-  //   // Retrieve and parse the current stage from localStorage
-  //   // return Number(localStorage.getItem(this.currentStageKey)) || 1;
-  // }
-
-  // // This method sets the current stage
-  // setCurrentStage(stage: number): void {
-  //   // Save the current stage to localStorage
-  //   localStorage.setItem(this.currentStageKey, stage.toString());
-  // }
-
-  // // This method retrieves the highest stage completed
-  // getHighestStageCompleted(): number {
-  //   // Retrieve and parse the highest completed stage from localStorage
-  //   const stage = localStorage.getItem(this.highestStageCompletedKey);
-  //   return stage ? parseInt(stage, 10) : 0;  // If nothing is saved, no stages are completed
-  // }
-
-  // // This method sets the highest stage completed
-  // setHighestStageCompleted(stage: number): void {
-  //   // Save the highest completed stage to localStorage
-  //   localStorage.setItem(this.highestStageCompletedKey, stage.toString());
-  // }

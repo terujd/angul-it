@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 // Exports the component class
 export class CaptchaComponent {
   @Input() currentStage!: number;// Defines the input property for the current stage
-  @Output() success = new EventEmitter<{ stage: number; tries: number }>();// Defines the output property for the success event
+  @Output() captchaSuccess = new EventEmitter<{ stage: number; tries: number }>();// Defines the output property for the success event
   token: string|undefined;// Defines the token property
   numTries = 0;// Defines the number of tries property
 
@@ -29,7 +29,7 @@ export class CaptchaComponent {
       return ;// Returns from the method
     }
 
-    this.success.emit({ stage: this.currentStage, tries: this.numTries });// Emits the success event
+    this.captchaSuccess.emit({ stage: this.currentStage, tries: this.numTries });// Emits the success event
     console.debug(`Token [${this.token}] generated`);// Logs the token to the console
     form.reset();// Resets the form
   }

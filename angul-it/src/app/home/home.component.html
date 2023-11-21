@@ -7,7 +7,7 @@
     <div *ngIf="currentStage === 1">
         <app-captcha
             [currentStage]="currentStage"
-            (success)="onCaptchaSuccess($event)"
+            (captchaSuccess)="onCaptchaSuccess($event)"
         ></app-captcha>
     </div>
 
@@ -15,7 +15,7 @@
         <app-math
             operation="addition"
             [currentStage]="currentStage"
-            (success)="onCaptchaSuccess($event)"
+            (mathSuccess)="onCaptchaSuccess($event)"
         ></app-math>
     </div>
 
@@ -23,10 +23,10 @@
         <app-math
             operation="subtraction"
             [currentStage]="currentStage"
-            (success)="onCaptchaSuccess($event)"
+            (mathSuccess)="onCaptchaSuccess($event)"
         ></app-math>
     </div>
 
-    <app-question *ngIf="currentStage === 4" (success)="onQuestionSuccess($event)"></app-question>
+    <app-question *ngIf="currentStage === 4" (questionSuccess)="onQuestionSuccess($event)"></app-question>
     <app-result *ngIf="currentStage === totalStages + 1"></app-result>
 </div>
