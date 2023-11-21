@@ -72,6 +72,13 @@ Run
     ```
 for a dev server. Navigate to [localhost](http://localhost:4200/).
 
+### Production build, use:
+Run
+    ```bash
+    ng serve
+    ````
+for a prod server. Navigate to [angul-it](https://terujd.github.io/angul-it/)
+(this doesn't seem to take in the latest changes from the repo)
 ### Building the Project
 Run ng build to build the project. The build artifacts will be stored in the dist/ directory.
 
