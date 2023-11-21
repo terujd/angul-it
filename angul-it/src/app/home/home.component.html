@@ -3,12 +3,6 @@
     <button class="buttoncss" (click)="goToPreviousStage()" *ngIf="currentStage > 1">Previous Stage</button>
     <button class="buttoncss" (click)="goToNextStage()" *ngIf="currentStage <= highestStageCompleted && currentStage < totalStages">Next Stage</button>
 
-    <!-- Navigation buttons for specific stages -->
-    <!-- <button class="buttoncss" (click)="setStage(1)" *ngIf="currentStage !== 1">Stage 1</button>
-    <button class="buttoncss" (click)="setStage(2)" *ngIf="currentStage !== 2">Stage 2</button>
-    <button class="buttoncss" (click)="setStage(3)" *ngIf="currentStage !== 3">Stage 3</button>
-    <button class="buttoncss" (click)="setStage(4)" *ngIf="currentStage !== 4">Stage 4</button> -->
-
     <!-- Conditional content for each stage -->
     <div *ngIf="currentStage === 1">
         <app-captcha

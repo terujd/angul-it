@@ -52,15 +52,3 @@ export class QuestionComponent implements OnInit {
     }
   }
 }
-  // checkAnswer(): void {
-  //   this.numTries++;// Increment the number of tries
-
-  //   if (this.userAnswer.toLowerCase() === this.question.answer.toLowerCase()) {// This line checks if the user's answer is correct
-  //     this.isCorrect = true;// This line sets the isCorrect flag to true
-  //     this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
-  //     this.numTries = 0;// Reset the number of tries
-  //   } else {
-  //     this.isCorrect = false;// This line sets the isCorrect flag to false
-  //     this.wrongAnswer = true;// This line sets the wrongAnswer flag to true
-  //   }
-  // }

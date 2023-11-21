@@ -64,12 +64,3 @@ export class MathComponent implements OnInit {
     }
   }
 }
-  // checkAnswer(): void {
-  //   if (this.userAnswer === this.correctAnswer) {// This line checks if the user's answer is correct
-  //     this.isCorrect = true;// This line sets the isCorrect flag to true
-  //     this.success.emit({ stage: this.currentStage, tries: this.numTries });// This line emits the success event
-  //   } else {
-  //     this.isCorrect = false;// This line sets the isCorrect flag to false
-  //     this.answered = true;// This line sets the answered flag to true
-  //   }
-  // }
