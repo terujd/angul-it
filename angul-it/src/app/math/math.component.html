@@ -2,7 +2,7 @@
     <p>Solve the following problem:</p>
     <form (ngSubmit)="checkAnswer()">
         <label for="userAnswer" class="question">{{ question }} = ?</label>
-        <input type="number" id="userAnswer" [(ngModel)]="userAnswer" name="userAnswer" (ngModelChange)="answered = false" />
+        <input type="text" id="userAnswer" [(ngModel)]="userAnswer" pattern="^-?\d*(\.\d+)?$" name="userAnswer" (ngModelChange)="answered = false" />
         <button class="buttoncss" type="submit">Submit</button>
         <p *ngIf="errorMessage">{{ errorMessage }}</p>
         <!-- <p *ngIf="answered && !isCorrect">Incorrect, try again!</p> -->
